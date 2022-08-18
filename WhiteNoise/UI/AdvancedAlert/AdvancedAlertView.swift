@@ -27,6 +27,7 @@ enum AlertElementType {
     case willSetupAction(action: (_ alertController: AdvancedAlertViewController)->())
     case didSetupAction(action: (_ alertController: AdvancedAlertViewController)->())
     case didAppearAction(action: (_ alertController: AdvancedAlertViewController)->())
+    case closeAction(_ action: ()->())
 }
 
 final class AdvancedAlertView: UIScrollView {
@@ -34,11 +35,14 @@ final class AdvancedAlertView: UIScrollView {
     public var textField: UITextField?
     public var elements: [AlertElementType]?
     public var beforeCloseAction = {}
+    public var closeAction = {}
     public var textFields = Array<UITextField>()
     public var buttons = Array<UIButton>()
     private var beginEditingTFActions = Array<(_ textField: UITextField, _ alertController: AdvancedAlertViewController)->()>()
     private var endEditingTFActions = Array<(_ textField: UITextField, _ alertController: AdvancedAlertViewController)->()>()
     private var changedValueTFActions = Array<(_ textField: UITextField, _ alertController: AdvancedAlertViewController)->()>()
+    
+    
     
     private weak var advancedAlertVC: AdvancedAlertViewController?
     
@@ -127,7 +131,9 @@ final class AdvancedAlertView: UIScrollView {
     @objc private func closeDisplay() {
         fadeOut()
         alertBackground.fadeOutToLeftSide(withOpaque: true) { [weak self] in
-            self?.advancedAlertVC?.dismiss(animated: false)
+            self?.advancedAlertVC?.dismiss(animated: false, completion: { [weak self] in
+                self?.closeAction()
+            })
         }
     }
     
@@ -311,6 +317,8 @@ final class AdvancedAlertView: UIScrollView {
             case .action(action: let action):
                 guard let advancedAlertVC = advancedAlertVC else { break }
                 action(advancedAlertVC)
+            case .closeAction(let action):
+                closeAction = action
             default:
                 break
             }

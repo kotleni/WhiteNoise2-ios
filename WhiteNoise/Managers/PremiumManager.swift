@@ -66,7 +66,7 @@ final class PremiumManager {
     
     /// Check if premium subscribed
     func isPremiumExist(for premiumTypes: [PremiumSubscribe] = PremiumSubscribe.allCases) async -> Bool {
-        let productIds = premiumTypes.map{ $0.rawValue }
+        let productIds = premiumTypes.map { $0.rawValue }
         guard let products = try? await Product.products(for: productIds) else { return false }
         guard !products.isEmpty else { return false }
         

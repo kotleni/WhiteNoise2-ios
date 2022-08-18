@@ -378,23 +378,19 @@ final class MixViewController: UIViewController {
     private func watchAd(button: UIButton, alertController: AdvancedAlertViewController) {
         if let lockedSoundIndexPath = lockedSoundIndexPath {
             if let ad = rewardedAd {
-                let elements: [AlertElementType] = [
-                    .closeButton,
-                    .label(text: "Waiting ad..."),
-                ]
+               
                 
                 // MARK: todo alertController.close()
-                alertController.showAdvancedAlert(elements)
                 
-                print("[AD] Try ad present")
-                ad.present(fromRootViewController: self) {
-                    let reward = ad.adReward
-                    print("[AD] Reward received with currency \(reward.amount), amount \(reward.amount.doubleValue)")
-                    
-                    // reward the user
-                    self.lockedSound?.isLocked = false
-                    self.mainView.refreshSoundData(for: lockedSoundIndexPath)
-                }
+                    print("[AD] Try ad present")
+                    ad.present(fromRootViewController: self) {
+                        let reward = ad.adReward
+                        print("[AD] Reward received with currency \(reward.amount), amount \(reward.amount.doubleValue)")
+                        
+                        // reward the user
+                        self.lockedSound?.isLocked = false
+                        self.mainView.refreshSoundData(for: lockedSoundIndexPath)
+                    }
             } else {
                 print("[AD] Ad not loaded")
                 guard let image = UIImage(named: "GiftImage") else { return }
@@ -402,9 +398,19 @@ final class MixViewController: UIViewController {
                     .closeButton,
                     .spacer(height: 150),
                     .backgroundImage(image: image, topPadding: 66, bottomPadding: 64, leftPadding: 13, rightPadding: -60),
+                    .closeAction {
+                        self.lockedSound?.isLocked = false
+                        self.mainView.refreshSoundData(for: lockedSoundIndexPath)
+                    }
                 ]
+                
+//                alertController.close()
                 // MARK: todo alertController.close()
-                alertController.showAdvancedAlert(elements)
+                alertController.advancedAlertView.closeAction = {
+                    self.showAdvancedAlert(elements)
+                }
+                alertController.close()
+                
             }
         }
     }

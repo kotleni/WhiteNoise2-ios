@@ -17,7 +17,6 @@ final class AdvancedAlertViewController: UIViewController {
     public var elements: [AlertElementType]?
     public lazy var advancedAlertView = AdvancedAlertView(viewController: self, elements: elements)
     
-    
     convenience init(elements: [AlertElementType]? = nil) {
         self.init()
         self.elements = elements
