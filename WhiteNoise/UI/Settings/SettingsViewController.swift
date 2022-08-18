@@ -20,6 +20,11 @@ final class SettingsViewController: CustomUIViewController {
         view = settingsView
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        settingsView.willAppear()
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }

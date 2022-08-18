@@ -18,6 +18,7 @@ protocol MixViewDisplayLogic: AnyObject {
     func halfFadeOutTabBar()
     func halfFadeInTabBar()
     func showAlertForLockedSound(sound: Sound, for indexPath: IndexPath?)
+    func hideUpgradeButton()
 }
 
 final class MixViewController: UIViewController {
@@ -426,6 +427,12 @@ final class MixViewController: UIViewController {
 }
 
 extension MixViewController: MixViewDisplayLogic {
+    
+    func hideUpgradeButton() {
+        upgradeButton.alpha = 0.0
+        upgradeButton.isUserInteractionEnabled = false
+    }
+    
     
     func showAlertForLockedSound(sound: Sound, for indexPath: IndexPath? = nil) {
         lockedSound = sound

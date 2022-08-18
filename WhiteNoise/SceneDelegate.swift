@@ -21,12 +21,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
         preparePremiumVersion()
         
-        
-        
-        
-//        #if DEBUG
-//        print("Running debug build.")
-//        #endif
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -50,9 +44,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     private func preparePremiumVersion() {
-        print("prepare")
-        
-        
         Task.init {
             PremiumManager.shared.loadProducts()
             guard await PremiumManager.shared.isPremiumExist() else { return }

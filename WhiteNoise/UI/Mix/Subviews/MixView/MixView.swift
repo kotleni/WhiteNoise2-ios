@@ -23,8 +23,6 @@ final class MixView: UIView {
     
     
 //        MARK: - UI Elements
-    
-
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -281,6 +279,7 @@ extension MixView: SoundCollectionViewCellDelegate {
 // MARK: - Premium methods
 extension MixView: PremiumProtocol {
     func premiumPurchased() {
+        mixViewDisplayLogic.hideUpgradeButton()
         Task.init {
             guard await PremiumManager.shared.isPremiumExist() else { return }
             Sound.unlockAllSounds()

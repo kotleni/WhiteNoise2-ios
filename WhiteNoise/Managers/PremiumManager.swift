@@ -21,6 +21,9 @@ final class PremiumManager {
     
     // MARK: don't use static link for objects
     static let shared = PremiumManager()
+    //shows if current premium version
+    
+    var isPremium = false
     
     private var products: [Product] = []
     private lazy var productIds: [String] = PremiumSubscribe.allCases.map { $0.rawValue }
@@ -36,8 +39,9 @@ final class PremiumManager {
     func loadProducts() {
         Task.init {
             products = try await Product.products(for: productIds)
-            print("[PremiumManager] Products loaded: \(products)")
+            isPremium = await isPremiumExist()
         }
+        
     }
     
     ///Purchase subscribtion
@@ -46,8 +50,14 @@ final class PremiumManager {
             for product in products {
                 if product.id == premiumSubscribe.rawValue {
                     guard let result = try? await product.purchase() else { return }
-                    DispatchQueue.main.async {
+                    DispatchQueue.main.async { [weak self] in
                         completion(result)
+                        switch result {
+                        case .success(_):
+                            self?.isPremium = true
+                        @unknown default:
+                            break
+                        }
                     }
                 }
             }

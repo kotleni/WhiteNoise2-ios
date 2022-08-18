@@ -218,11 +218,15 @@ final class PaywallView: UIView {
     
     @objc
     private func purchaseTapped(view: UIView) {
-        PremiumManager.shared.purchase(premiumSubscribe: subSelect) { [weak self] result in
+        PremiumManager.shared.purchase(premiumSubscribe: subSelect) { [unowned self] result in
             switch result {
             case .success(_):
+                if self.isFirstLaunch {
+                    Sound.unlockAllSounds()
+                } else {
                 PremiumManager.shared.refreshEntities()
-                self?.closeView()
+                }
+                self.closeView()
 //                self?.configureExistingSubscriptions()
                 
             case .userCancelled:

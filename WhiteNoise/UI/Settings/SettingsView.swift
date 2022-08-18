@@ -11,6 +11,8 @@ import UIKit
 final class SettingsView: CustomUIView {
     
     let items = SettingType.AppSettings.allCases
+    var tableViewTopAnchor: NSLayoutConstraint?
+    var isPremium = PremiumManager.shared.isPremium
     
     private lazy var label: UILabel = {
         let view = UILabel()
@@ -37,7 +39,7 @@ final class SettingsView: CustomUIView {
         let view = SettingsFrameView(settingsView: self)
 //        view.isHidden = true //temporary
         view.translatesAutoresizingMaskIntoConstraints = false
-        
+        view.isHidden = isPremium
         return view
     }()
     
@@ -84,6 +86,22 @@ final class SettingsView: CustomUIView {
         settingsFrame.viewDidAppear(animated)
     }
     
+    func subButtonClick() {
+        viewController?.navigationController?.pushViewController(PaywallViewController(), animated: true)
+    }
+    
+    func willAppear() {
+        isPremium = PremiumManager.shared.isPremium
+        if isPremium {
+            guard let tableViewTopAnchor = tableViewTopAnchor else { return }
+            NSLayoutConstraint.deactivate([tableViewTopAnchor])
+            settingsFrame.isHidden = isPremium
+            tableView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 16.0)
+                .isActive = true
+        }
+    }
+    
+    
     private func setUpConstraints() {
         // closeBtn
         NSLayoutConstraint.activate([
@@ -110,19 +128,27 @@ final class SettingsView: CustomUIView {
         ])
         
         // tableView
+        tableViewTopAnchor = isPremium ? tableView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 16.0) : tableView.topAnchor.constraint(equalTo: settingsFrame.bottomAnchor, constant: 32)
+        guard let tableViewTopAnchor = tableViewTopAnchor else { return }
+
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: settingsFrame.bottomAnchor, constant: 32), //добавить после того, как внедрим подписку
-//            tableView.topAnchor.constraint(equalTo: closeBtn.bottomAnchor, constant: 16.0), // Временно
+//            tableView.topAnchor.constraint(equalTo: settingsFrame.bottomAnchor, constant: 32), //добавить после того, как внедрим подписку
+////            tableView.topAnchor.constraint(equalTo: closeBtn.bottomAnchor, constant: 16.0), // Временно
+            ///
+            tableViewTopAnchor,
             tableView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
         ])
+        
+        
     }
     
     @objc
     private func closeView(view: UIView) {
         viewController?.navigationController?.popViewController(animated: true)
     }
+    
     
     private func itemSelected(setting: SettingType.AppSettings) {
         switch setting {
@@ -145,9 +171,7 @@ final class SettingsView: CustomUIView {
         }
     }
     
-    func subButtonClick() {
-        viewController?.navigationController?.pushViewController(PaywallViewController(), animated: true)
-    }
+    
     
     private func presentShareSheet() {
         guard let appURL = URL(string: "https://apps.apple.com/ru/app/white-point-noise/id1634811540") else { return }
