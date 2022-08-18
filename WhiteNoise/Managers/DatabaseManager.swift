@@ -10,7 +10,7 @@ import CoreData
 
 final class DatabaseManager {
     
-    
+    // MARK: don't use static link for objects
     static let shared = DatabaseManager()
     
     let persistentContainer: NSPersistentContainer = {

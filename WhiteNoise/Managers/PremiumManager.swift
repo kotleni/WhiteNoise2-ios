@@ -19,6 +19,7 @@ protocol PremiumProtocol  {
 
 final class PremiumManager {
     
+    // MARK: don't use static link for objects
     static let shared = PremiumManager()
     
     private var products: [Product] = []
@@ -35,6 +36,7 @@ final class PremiumManager {
     func loadProducts() {
         Task.init {
             products = try await Product.products(for: productIds)
+            print("[PremiumManager] Products loaded: \(products)")
         }
     }
     

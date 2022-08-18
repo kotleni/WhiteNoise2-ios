@@ -10,7 +10,7 @@ import Foundation
 
 final class MixManager {
     
-    
+    // MARK: don't use static link for objects
     static let shared = MixManager()
     
     

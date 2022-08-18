@@ -8,6 +8,7 @@
 import UIKit
 
 class HapticManager {
+    
     static var shared: HapticManager = {
         let manager = HapticManager()
         

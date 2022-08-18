@@ -28,7 +28,7 @@ enum MixType {
 
 final class AudioManager {
     
-    
+    // MARK: don't use static link for objects
     static let shared = AudioManager()
     
     var playbackState = PlaybackState.pause {

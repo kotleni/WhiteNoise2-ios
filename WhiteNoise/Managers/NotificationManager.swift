@@ -9,6 +9,7 @@ import NotificationCenter
 
 
 class NotificationsManager {
+    // MARK: don't use static link for objects
     static let shared = NotificationsManager()
     
     /// Start new notifications task

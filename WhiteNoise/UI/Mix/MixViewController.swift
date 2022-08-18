@@ -366,7 +366,6 @@ final class MixViewController: UIViewController {
                            completionHandler: { [self] ad, error in
           if let error = error {
             print("[AD] Failed to load rewarded ad with error: \(error.localizedDescription)")
-
             return
           }
           rewardedAd = ad
