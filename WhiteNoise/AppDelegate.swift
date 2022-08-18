@@ -9,8 +9,9 @@ import UIKit
 import CoreData
 import GoogleMobileAds
 
-@main
+// monorim.WhiteNoise
 
+@main
 final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var orientationLock = UIInterfaceOrientationMask.all
