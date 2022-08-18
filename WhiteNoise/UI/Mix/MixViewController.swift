@@ -378,10 +378,6 @@ final class MixViewController: UIViewController {
     private func watchAd(button: UIButton, alertController: AdvancedAlertViewController) {
         if let lockedSoundIndexPath = lockedSoundIndexPath {
             if let ad = rewardedAd {
-               
-                
-                // MARK: todo alertController.close()
-                
                     print("[AD] Try ad present")
                     ad.present(fromRootViewController: self) {
                         let reward = ad.adReward
@@ -404,8 +400,6 @@ final class MixViewController: UIViewController {
                     }
                 ]
                 
-//                alertController.close()
-                // MARK: todo alertController.close()
                 alertController.advancedAlertView.closeAction = {
                     self.showAdvancedAlert(elements)
                 }
