@@ -17,6 +17,7 @@ enum SettingType {
     enum AppSettings: String, CaseIterable {
         case contactUs = "SettingsContactUs"
         case inviteFriend = "SettingsInviteFriend"
+        case terms = "SettingsTerms"
         case privacyPolicy = "SettingsPrivacyPolicy"
         case rateUs = "SettingsRateUs"
         case setReminder = "SettingsSetReminder"

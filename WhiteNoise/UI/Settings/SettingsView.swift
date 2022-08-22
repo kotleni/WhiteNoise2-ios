@@ -153,21 +153,29 @@ final class SettingsView: CustomUIView {
     private func itemSelected(setting: SettingType.AppSettings) {
         switch setting {
         case .contactUs:
-            var components = URLComponents(string: "slava9611@gmail.com")
-            components?.queryItems = [URLQueryItem(name: "subject", value: "Subject about WhiteNoise app")]
-            components?.scheme = "mailto"
-            if let mailUrl = components?.url {
-                
-                UIApplication.shared.open(mailUrl, options: [:], completionHandler: nil)
-            }
+            openLink(scheme: "mailto", url: "slava9611@gmail.com", queryItems: [URLQueryItem(name: "subject", value: "Subject about WhiteNoise app")])
         case .inviteFriend:
             presentShareSheet()
         case .privacyPolicy:
-            viewController?.navigationController?.pushViewController(PrivacyViewController(), animated: true)
+            openLink(scheme: "https", url: "pages.flycricket.io/rain-sounds-relax-m-0/privacy.html", queryItems: nil)
+//            viewController?.navigationController?.pushViewController(PrivacyViewController(), animated: true)
+        case .terms:
+            openLink(scheme: "https", url: "pages.flycricket.io/rain-sounds-relax-m-1/terms.html", queryItems: nil)
         case .rateUs:
             presentRatingWindow()
         case .setReminder:
             viewController?.navigationController?.pushViewController(PlansleepViewController(), animated: true)
+        
+        }
+    }
+    
+    private func openLink(scheme: String, url: String, queryItems: [URLQueryItem]?) {
+        var components = URLComponents(string: url)
+        components?.queryItems = queryItems
+        components?.scheme = scheme
+        if let mailUrl = components?.url {
+            
+            UIApplication.shared.open(mailUrl, options: [:], completionHandler: nil)
         }
     }
     

@@ -9,6 +9,8 @@ import UIKit
 
 class PrivacyView: UIView {
     
+    private var privacyText = ""
+    
     private lazy var headerStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -53,7 +55,7 @@ class PrivacyView: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.font = UIFont(name: "Nunito-Bold", size: 16)
         view.textColor = .fromNormalRgb(red: 241, green: 233, blue: 255)
-        view.text = magicString
+        view.text = privacyText
         view.numberOfLines = 0
         
         return view
@@ -72,6 +74,7 @@ class PrivacyView: UIView {
         setUpConstraints()
         setBlurEffect()
     }
+    
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -142,6 +145,7 @@ class PrivacyView: UIView {
     
     
 }
+
 
 let magicString = """
 This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.
