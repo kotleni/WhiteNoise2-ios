@@ -94,6 +94,27 @@ final class PaywallView: UIView {
         return view
     }()
     
+    private lazy var privacyButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Privacy", for: .normal)
+        button.titleLabel?.font = UIFont(name: "Nunito-Medium", size: 20)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitleColor(UIColor.systemBlue, for: .normal)
+        button.addTarget(self, action: #selector(policyButtonTapped(sender:)), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var termsButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Terms of use", for: .normal)
+        button.titleLabel?.font = UIFont(name: "Nunito-Medium", size: 20)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.tag = 1
+        button.setTitleColor(UIColor.systemBlue, for: .normal)
+        button.addTarget(self, action: #selector(policyButtonTapped(sender:)), for: .touchUpInside)
+        return button
+    }()
+    
     private var subSelect: PremiumSubscribe = .yearly {
         didSet {
             if(subSelect == .yearly) {
@@ -135,6 +156,8 @@ final class PaywallView: UIView {
         addSubview(subButton)
         addSubview(sub1Button)
         addSubview(sub2Button)
+        addSubview(privacyButton)
+        addSubview(termsButton)
         addSubview(closeBtn)
 //        viewController?.navigationController?.view.addSubview(closeBtn)
 //        
@@ -185,15 +208,30 @@ final class PaywallView: UIView {
         // textImage
         let deviceName = UIDevice.modelName
         let textImagePadding = (deviceName == "iPod9,1" || deviceName == "Simulator iPod touch (7th generation)") ? -30.0 : 64.0
+        
         NSLayoutConstraint.activate([
             textImage.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: textImagePadding),
             textImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 32),
             textImage.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -32),
         ])
         
+        //Privacy
+        NSLayoutConstraint.activate([
+            privacyButton.bottomAnchor.constraint(equalTo: termsButton.topAnchor),
+            privacyButton.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor),
+            privacyButton.heightAnchor.constraint(equalToConstant: 30)
+            ])
+        
+        //Terms
+        NSLayoutConstraint.activate([
+            termsButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            termsButton.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor),
+            termsButton.heightAnchor.constraint(equalToConstant: 30)
+            ])
+        
         // subButton
         NSLayoutConstraint.activate([
-            subButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16),
+            subButton.bottomAnchor.constraint(equalTo: privacyButton.topAnchor, constant: -16),
             subButton.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 16),
             subButton.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -16),
             subButton.heightAnchor.constraint(equalToConstant: 60)
@@ -214,6 +252,9 @@ final class PaywallView: UIView {
             sub1Button.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -16),
             sub1Button.heightAnchor.constraint(equalToConstant: 60)
         ])
+        
+        
+        
     }
     
     @objc
@@ -237,6 +278,13 @@ final class PaywallView: UIView {
                 break
             }
         }
+    }
+    
+    @objc
+    private func policyButtonTapped(sender: UIButton) {
+        let url =  sender.tag == 0 ? "pages.flycricket.io/rain-sounds-relax-m-0/privacy.html" :
+        "pages.flycricket.io/rain-sounds-relax-m-1/terms.html"
+        openLink(scheme: "https", url: url, queryItems: nil)
     }
     
     @objc
@@ -290,5 +338,15 @@ final class PaywallView: UIView {
             }
         }
         
+    }
+    
+    private func openLink(scheme: String, url: String, queryItems: [URLQueryItem]?) {
+        var components = URLComponents(string: url)
+        components?.queryItems = queryItems
+        components?.scheme = scheme
+        if let mailUrl = components?.url {
+            
+            UIApplication.shared.open(mailUrl, options: [:], completionHandler: nil)
+        }
     }
 }
