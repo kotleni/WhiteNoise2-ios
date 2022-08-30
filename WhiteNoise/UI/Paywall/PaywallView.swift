@@ -282,8 +282,8 @@ final class PaywallView: UIView {
     
     @objc
     private func policyButtonTapped(sender: UIButton) {
-        let url =  sender.tag == 0 ? "pages.flycricket.io/rain-sounds-relax-m-0/privacy.html" :
-        "pages.flycricket.io/rain-sounds-relax-m-1/terms.html"
+        let url =  sender.tag == 0 ? "kotleni.github.io/monorim/policy.html" :
+        "kotleni.github.io/monorim/terms.html"
         openLink(scheme: "https", url: url, queryItems: nil)
     }
     

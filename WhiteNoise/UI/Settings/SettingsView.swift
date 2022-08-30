@@ -153,14 +153,14 @@ final class SettingsView: CustomUIView {
     private func itemSelected(setting: SettingType.AppSettings) {
         switch setting {
         case .contactUs:
-            openLink(scheme: "mailto", url: "slava9611@gmail.com", queryItems: [URLQueryItem(name: "subject", value: "Subject about WhiteNoise app")])
+            openLink(scheme: "mailto", url: "monorimltd@gmail.com", queryItems: [URLQueryItem(name: "subject", value: "Subject about WhiteNoise app")])
         case .inviteFriend:
             presentShareSheet()
         case .privacyPolicy:
-            openLink(scheme: "https", url: "pages.flycricket.io/rain-sounds-relax-m-0/privacy.html", queryItems: nil)
+            openLink(scheme: "https", url: "kotleni.github.io/monorim/terms.html", queryItems: nil)
 //            viewController?.navigationController?.pushViewController(PrivacyViewController(), animated: true)
         case .terms:
-            openLink(scheme: "https", url: "pages.flycricket.io/rain-sounds-relax-m-1/terms.html", queryItems: nil)
+            openLink(scheme: "https", url: "kotleni.github.io/monorim/policy.html", queryItems: nil)
         case .rateUs:
             presentRatingWindow()
         case .setReminder:
