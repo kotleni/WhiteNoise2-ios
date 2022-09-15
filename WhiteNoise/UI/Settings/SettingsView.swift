@@ -157,10 +157,10 @@ final class SettingsView: CustomUIView {
         case .inviteFriend:
             presentShareSheet()
         case .privacyPolicy:
-            openLink(scheme: "https", url: "kotleni.github.io/monorim/terms.html", queryItems: nil)
+            openLink(scheme: "https", url: "kotleni.github.io/monorim/policy.html", queryItems: nil)
 //            viewController?.navigationController?.pushViewController(PrivacyViewController(), animated: true)
         case .terms:
-            openLink(scheme: "https", url: "kotleni.github.io/monorim/policy.html", queryItems: nil)
+            openLink(scheme: "https", url: "kotleni.github.io/monorim/terms.html", queryItems: nil)
         case .rateUs:
             presentRatingWindow()
         case .setReminder:
