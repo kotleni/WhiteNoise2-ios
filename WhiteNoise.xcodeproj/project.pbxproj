@@ -46,6 +46,7 @@
 		5AAB52E32813EC3C003C53E3 /* CustomUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB52E22813EC3C003C53E3 /* CustomUIView.swift */; };
 		5AAB52E52813EC8C003C53E3 /* CustomUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB52E42813EC8C003C53E3 /* CustomUIViewController.swift */; };
 		5AB9A8B0280D82E9009895BC /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB9A8AF280D82E9009895BC /* HapticManager.swift */; };
+		5AD3B83F28E598C300200FB6 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD3B83E28E598C300200FB6 /* StoreKit.framework */; };
 		5AE64C9728130650007F5CED /* SettingItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE64C9628130650007F5CED /* SettingItemCell.swift */; };
 		F90166C02882EDEF005E8BDD /* EnumTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90166BF2882EDEF005E8BDD /* EnumTypes.swift */; };
 		F90C8260285DD75800E61761 /* SavedMixesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90C825F285DD75800E61761 /* SavedMixesView.swift */; };
@@ -173,6 +174,7 @@
 		5AAB52E22813EC3C003C53E3 /* CustomUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUIView.swift; sourceTree = "<group>"; };
 		5AAB52E42813EC8C003C53E3 /* CustomUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUIViewController.swift; sourceTree = "<group>"; };
 		5AB9A8AF280D82E9009895BC /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
+		5AD3B83E28E598C300200FB6 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		5AE64C9628130650007F5CED /* SettingItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingItemCell.swift; sourceTree = "<group>"; };
 		F90166BF2882EDEF005E8BDD /* EnumTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumTypes.swift; sourceTree = "<group>"; };
 		F90C825F285DD75800E61761 /* SavedMixesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedMixesView.swift; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F922BF9628A82A6E000F97F7 /* GoogleMobileAds in Frameworks */,
+				5AD3B83F28E598C300200FB6 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +274,7 @@
 		5A19AC8328AE793C006659E4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5AD3B83E28E598C300200FB6 /* StoreKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -986,7 +990,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = CD8526J4G4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WhiteNoise/Info.plist;
@@ -1019,7 +1023,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = CD8526J4G4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WhiteNoise/Info.plist;
