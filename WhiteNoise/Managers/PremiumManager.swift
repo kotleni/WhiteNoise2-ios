@@ -93,11 +93,13 @@ final class PremiumManager {
     func getPrice(for subscribe: PremiumSubscribe) -> String? {
         for product in products {
             if product.id == subscribe.rawValue {
-                return product.price.formatted()
+                return product.displayPrice
             }
         }
         return nil
     }
+    
+    
     // Sets entity conformed to PremiumProtocol
     func setEntityForPremium(entity: PremiumProtocol) {
         entitiesWithPremium.append(entity)
